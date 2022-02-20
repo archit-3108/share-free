@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Free</title>
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    </script>
+    <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./footer.css">
+
+    <link rel="stylesheet" href="./new-nav.css" type="text/css">
+    <link rel="shortcut icon" href="./asset/share freez-logos_white.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro&family=Literata">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" />
+
+    
+</head>
+<body>
+        <nav class="fixed-nav-bar">
+            <a class="brand">
+              <img src="./asset/share freez-logos_black_main.png" />
+            </a>
+            <a class="link" href="#">About</a>
+            <a class="link" href="#">Products</a>
+            <a class="link" href="/views/contact.html">Contact</a>
+        </nav>
+        
+        <hr class="divide">
+
+        <div id="buttons">
+            <div id="upload_btn">
+                <input type="file" id="photo" />
+                <button id="up_btn" onclick="uploadImage()">Upload File</button>
+            </div>
+            <div id="all_status">
+                <h1 id="file_status"></h1>
+            </div>
+            <div id="passcode">
+                <h3>Your Passcode is: <span id="passcodedigit"></span></h3>
+                <!-- <h3>
+                    <% %>
+                </h3> -->
+            </div>
+            <div id="download_passcode">
+                <input id="download_passcode_input" type="number" placeholder="Code">
+                <button id="check_passcode" onclick="passcodedownload()">Get File</button>
+    
+            </div>
+            <div id="upload_btn">
+    
+                <button id="down_btn" onclick="downloadImage()">Download File</button>
+            </div>
+        
+        </div>
+
+        <hr class="divide">
+    
+        <footer class="site-footer">
+            <div class="container">
+              <div class="rowLinks">
+                <div class="footer-img">
+                  <img src="./asset/share freez-logos_white.png" alt="codefreez logo" class="footer-logo">
+                </div>
+      
+                <div class="moreLinks">
+                  <h6>More Links</h6>
+                  <ul class="footer-links">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Products</a></li>
+                  </ul>
+                </div>
+      
+                <div class="supportLinks">
+                  <h6>Help & Support</h6>
+                  <ul class="footer-links">
+                    <li><a href="mailto:archit1913091@akgec.ac.in">Technical Support</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                  </ul>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="copyrighting">
+                  <p class="copyright-text">Copyright &copy; 2021 All Rights Reserved by 
+               <a href="#">Share free</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+      </footer>
+
+
+        
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+    
+      <script type="module">
+        // Import the functions you need from the SDKs you need
+        
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.5/firebase-analytics.js";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyAsZMU5dCbQyw9UIj_QxbV1XxhLd8THbCo",
+          authDomain: "codefreez1.firebaseapp.com",
+          databaseURL: "https://codefreez1-default-rtdb.asia-southeast1.firebasedatabase.app",
+          projectId: "codefreez1",
+          storageBucket: "codefreez1.appspot.com",
+          messagingSenderId: "332204864375",
+          appId: "1:332204864375:web:5ba5818a338b56ab74a772",
+          measurementId: "G-B9V7XGEX3P"
+
+        };
+      
+        // Initialize Firebase
+        // const app = initializeApp(firebaseConfig);
+        // const analytics = getAnalytics(app);
+
+        firebase.initializeApp(firebaseConfig);
+    console.log(firebase);
+      </script>
+
+
+      <script>
+          function uploadImage() {
+        document.getElementById("file_status").innerText = 'Uploading File...';
+        
+        const ref = firebase.storage().ref();
+
+        // const ref = new Firebase("https://codefreez1-default-rtdb.asia-southeast1.firebasedatabase.app.firebaseo.com");
+        const file = document.querySelector("#photo").files[0];
+        const name = +new Date() + "-" + file.name;
+        const metadata = {
+            contentType: file.type
+        };
+        const task = ref.child(name).put(file, metadata);
+        task
+            .then(snapshot => snapshot.ref.getDownloadURL())
+            .then(url => {
+                console.log(url);
+                const rnd_num = Math.floor(100000 + Math.random() * 900000)
+                fetch('/uploadtodb', {
+                    method: 'post',
+                    body: JSON.stringify({ url: url, passcode: rnd_num }),
+                    headers: {
+                        'content-type': 'application/json'
+                    }
+                }).then(() => {
+                    document.getElementById("file_status").innerHTML = `Uploaded Successfully <a href="${url}">View</a>`;
+
+                    //   document.getElementById("file_status").innerText='File Uploaded Successfully';
+                    document.getElementById("passcode").style.display = 'block'
+                    document.getElementById("passcodedigit").innerText = rnd_num;
+                    document.getElementById('link').innerHTML = `<a href = "${url}" download>Download Now</a>`
+
+                    document.getElementById('link').src = url;
+
+                }).catch(console.log('Something went wrong'))
+
+            })
+            .catch(console.log('error'));
+    }
+    function downloadImage() {
+        document.getElementById('passcode').style.display = 'none'
+        document.getElementById("file_status").style.display = 'none'
+        document.getElementById("download_passcode").style.display = 'block'
+    }
+    function passcodedownload() {
+        const pass = document.getElementById('download_passcode_input').value;
+        fetch('/getfromdb', {
+            method: 'post',
+            body: JSON.stringify({ passcode: pass }),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then((data) => {
+            return data.json()
+
+
+        }).then((data) => {
+            window.location.href = `${data.url}`
+        })
+
+    }
+
+
+    // Success
+    function handleSuccess(stream) {
+        window.stream = stream;
+        video.srcObject = stream;
+    }
+
+    // Load init
+    init();
+
+    // Draw image
+    var context = canvas.getContext('2d');
+    snap.addEventListener("click", function () {
+        context.drawImage(video, 0, 0, 640, 480);
+        var image = new Image();
+        image.id = "pic";
+        image.src = canvas.toDataURL();
+        console.log(image.src)
+        var button = document.createElement('button')
+        button.textContent = 'Upload Image'
+        document.body.appendChild(button)
+
+        button.onclick = function () {
+            const ref = firebase.storage().ref();
+            ref.child(new Date() + '-' + 'base64').putString(image.src, 'data_url').then(function (snapshot) {
+                console.log('Uploaded a data_url string!');
+                alert("Image Uploaded")
+            });
+        }
+    });
+      </script>
+</body>
+</html>

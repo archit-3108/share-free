@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.topSection{
+    
+    width: 100vw;
+    position: relative;
+    height: 100%;
+    box-shadow: 5px 5px black;
+}
+div{
+    display: block;
+}
+
+.developers-header-container {
+    width: 100vw;
+    position: fixed;
+    height:5vw;
+    background-color: #fff;
+    z-index: 1000;
+    right: 0;
+    left: 0;
+    margin: auto;
+    margin-top: 0;
+    box-sizing: border-box;
+
+}
+
+.developers-header-container .flexContainer {
+    display: flex;
+    margin: auto;
+    height: 100%;
+    justify-content: space-between;
+    z-index: 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+.developers-header-container .flexContainer .flexItemLogo .logo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: space-around;
+    height: 30px;
+    width: 140px;
+    padding: 18px 0;
+    /* background-color: black; */
+}
+
+.developers-header-container .flexContainer .flexItemLogo .logo img {
+    width: 140%;
+    height: 150%;
+    margin-left: 4vw;
+    width: 20vw;
+    height: 5vw;
+}
+
+.developers-header-container .flexContainer .flexItemMenu {
+    position: relative;
+}
+.developers-header-container .flexContainer .flexItemMenu .menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: space-around;
+    font-family: Proxima Nova Regular;
+    height: 100%;
+}
+.developers-header-container .flexContainer .flexItemMenu .menu .menuitem {
+    text-align: left;
+    color: #5d6586;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.developers-header-container .flexContainer .flexItemMenu .menu .button .buttonText {
+    margin: auto;
+    font-size: 1.1rem;
+    font-family: Proxima Nova Semibold;
+}
+.menuItemText, .menuitem{
+    margin: 5px 15px;
+}
+.menuItemText:hover{
+    text-decoration: underline;
+    color: #5fdf7f;
+}
+.noStyle {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+hr{
+    border: 2px solid black;
+}

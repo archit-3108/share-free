@@ -1,0 +1,22 @@
+{
+  "name": "share_free",
+  "version": "1.0.0",
+  "description": "A web-application to share files easily from one device to another",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Archit Agrawal",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "firebase": "^9.6.7",
+    "html": "^1.0.0",
+    "mongoose": "^6.2.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4"
+  }
+}
