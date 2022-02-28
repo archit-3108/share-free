@@ -5,19 +5,20 @@ const File = require('./models/file')
 const path = require('path')
 const port = process.env.PORT || 3000;
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'html');
 app.use(express.json());
 app.use(express.static('public'));
 console.log("actual")
 
-app.set("view engine", "ejs");
+app.set("view engine", "html");
 
 mongoose.connect('mongodb+srv://archittt:archit.b%4031@cluster0.ygado.mongodb.net/codefreezDB?retryWrites=true&w=majority').then(() => {
     console.log('connected to mongo');
 }).catch((err) => console.log('error while connecting mongo', err))
 
 app.get("/", (req, res) => {
-    res.render("index");
+    // res.render("index");
+    res.sendFile('D:/Web-Dev-practice/Share_free/views/index.html')
 })
 
 app.post("/", (req, res) => {
