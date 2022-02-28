@@ -16,11 +16,11 @@ mongoose.connect('mongodb+srv://archittt:archit.b%4031@cluster0.ygado.mongodb.ne
     console.log('connected to mongo');
 }).catch((err) => console.log('error while connecting mongo', err))
 
-app.get("/upload", (req, res) => {
+app.get("/", (req, res) => {
     res.render("index");
 })
 
-app.post("/upload", (req, res) => {
+app.post("/", (req, res) => {
     console.log(req)
 
     res.send('Success');
