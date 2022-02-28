@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://archittt:archit.b%4031@cluster0.ygado.mongodb.ne
 
 app.get("/", (req, res) => {
     // res.render("index");
-    res.sendFile(__dirname,'./index.html')
+    res.sendFile('views/index.html', {rot: __dirname})
 })
 
 app.post("/", (req, res) => {
