@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require('mongoose');
 const File = require('./models/file')
 const path = require('path')
+const port = process.env.PORT || 3000;
+
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(express.static('public'));
